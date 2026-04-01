@@ -217,31 +217,39 @@ export default function AutomacoesPage() {
               </div>
             ))}
 
-            {/* Highlight card — full width bottom row */}
-            {results.filter(r => r.highlight).map((r, i) => (
-              <div
-                key={i}
-                className="relative col-span-2 lg:col-span-4 flex flex-col sm:flex-row sm:items-center sm:justify-between
-                           p-6 sm:px-10 bg-red-600 overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-red-500/30 to-transparent pointer-events-none" />
-                {/* Diagonal slash decoration */}
-                <div className="absolute right-0 top-0 w-64 h-full opacity-10"
-                  style={{ background: "linear-gradient(135deg, transparent 40%, #fff 40%, #fff 42%, transparent 42%)" }}
-                />
-                <span className="relative font-black tabular-nums leading-none text-white text-4xl sm:text-5xl lg:text-6xl tracking-tighter">
-                  {r.number}
-                </span>
-                <div className="relative mt-3 sm:mt-0 sm:text-right">
-                  <p className="text-red-100 text-sm sm:text-base font-medium tracking-wide leading-snug">
-                    de horas economizadas
-                  </p>
-                  <p className="text-white font-black text-lg sm:text-xl tracking-wider uppercase">
-                    por ano
-                  </p>
+              {/* Highlight card — compact single-line strip */}
+              {results.filter(r => r.highlight).map((r, i) => (
+                <div
+                  key={i}
+                  className="relative col-span-2 lg:col-span-4 flex items-center gap-3 sm:gap-6
+                            px-4 sm:px-8 py-4 bg-red-600 overflow-hidden"
+                >
+                  {/* slash deco */}
+                  <div className="absolute right-0 top-0 w-48 h-full opacity-10 pointer-events-none"
+                    style={{ background: "linear-gradient(135deg, transparent 40%, #fff 40%, #fff 42%, transparent 42%)" }}
+                  />
+
+                  {/* ícone — some no mobile menor */}
+                  <span className="hidden sm:inline text-white/70 text-lg shrink-0">⏱</span>
+                  <div className="hidden sm:block w-px h-6 bg-red-400/60 shrink-0" />
+
+                  {/* número */}
+                  <span className="font-black tabular-nums text-white text-xl sm:text-3xl tracking-tighter leading-none shrink-0 whitespace-nowrap">
+                    {r.number}
+                  </span>
+
+                  {/* label — em mobile fica em linha única com nowrap */}
+                  <span className="text-red-100 text-[11px] sm:text-sm font-medium tracking-wide leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
+                    de horas economizadas por ano
+                  </span>
+
+                  {/* badge — some em mobile pequeno */}
+                  <span className="hidden sm:inline ml-auto shrink-0 text-[9px] font-black tracking-[0.25em] uppercase
+                                  border border-white/30 text-white/80 px-3 py-1">
+                    impacto real
+                  </span>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 

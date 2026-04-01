@@ -33,7 +33,7 @@ export default function BlogPage() {
               <Link
                 key={topic}
                 href={`/topics/${topic}`}
-                className="text-xs text-stone-500 dark:text-stone-400 border border-stone-200 dark:border-stone-700 px-3 py-1 rounded-full hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-700 dark:hover:text-stone-200 transition-all duration-200"
+                className="text-xs text-stone-500 dark:text-stone-300 border border-stone-200 dark:border-stone-700 px-3 py-1 rounded-full hover:border-stone-400 dark:hover:border-stone-500 hover:text-stone-700 dark:hover:text-stone-200 transition-all duration-200"
               >
                 {topic.charAt(0).toUpperCase() + topic.slice(1).replace(/-/g, " ")}
               </Link>
@@ -60,7 +60,7 @@ export default function BlogPage() {
                     <div className="flex items-center gap-3 mb-3">
                       <time
                         dateTime={post.date}
-                        className="text-[11px] tracking-wide text-stone-400 dark:text-stone-500 tabular-nums"
+                        className="text-[11px] tracking-wide text-stone-400 dark:text-stone-400 tabular-nums"
                       >
                         {post.date}
                       </time>

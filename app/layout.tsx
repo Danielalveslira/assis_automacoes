@@ -181,28 +181,34 @@ export default function RootLayout({
 
           {/* ── FOOTER ───────────────────────────────────────── */}
           <footer className="border-t border-zinc-200 dark:border-white/[0.07]
-                             bg-white dark:bg-zinc-900">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6
+                            bg-zinc-50/85 dark:bg-zinc-950/85 backdrop-blur-xl">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5
                             flex flex-col sm:flex-row items-center justify-between gap-3">
 
-              {/* Brand */}
-              <span className="font-bold tracking-[0.22em] uppercase text-sm
-                               bg-gradient-to-r from-zinc-900 to-blue-600
-                               dark:from-white dark:to-blue-300
-                               bg-clip-text text-transparent">
-                Evocorp
-              </span>
+              {/* Brand — igual ao nav */}
+              <Link href="/" className="flex flex-col leading-tight">
+                <span className="font-bold tracking-[0.22em] uppercase text-sm
+                                bg-gradient-to-r from-zinc-900 to-blue-600
+                                dark:from-white dark:to-blue-300
+                                bg-clip-text text-transparent">
+                  Evocorp
+                </span>
+                <span className="text-[10px] text-zinc-400 dark:text-zinc-500 tracking-wide">
+                  Evolução Digital.
+                </span>
+              </Link>
 
-              {/* Center copy */}
+              {/* Copy */}
               <p className="font-sans text-xs text-zinc-400 dark:text-zinc-600 tracking-wide">
                 © {new Date().getFullYear()} Evocorp — Todos os direitos reservados
               </p>
 
-              {/* Links */}
+              {/* Link */}
               <Link
                 href="/faq"
-                className="font-sans text-xs text-blue-600 dark:text-blue-400
-                           hover:underline underline-offset-4 transition-colors"
+                className="font-sans text-xs text-zinc-400 dark:text-zinc-500 tracking-[0.2em] uppercase
+                          hover:text-blue-600 dark:hover:text-blue-400
+                          transition-colors duration-200"
               >
                 FAQ
               </Link>
