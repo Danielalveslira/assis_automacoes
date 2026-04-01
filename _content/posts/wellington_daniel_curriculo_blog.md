@@ -4,7 +4,6 @@ date: "2026-04-01"
 authors:
   - name: "Wellington Lira"
     link: "https://github.com/Danielalveslira"
-description: "O jogo do cartão de crédito. 💳️"
 ---
 
 # Wellington Daniel
