@@ -222,27 +222,24 @@ export default function CompanyLandingPage() {
             <div className="absolute right-0 top-0 bottom-0 w-32 z-10
                             bg-gradient-to-l from-white dark:from-zinc-950 to-transparent pointer-events-none" />
 
-            <div className="flex gap-0 overflow-hidden">
-              {/* Duplicamos 3x para loop contínuo sem pulo */}
-              {[0, 1, 2].map((_, dupIdx) => (
+          <div className="overflow-hidden w-full">
+            <div className="flex w-max animate-marquee">
+              {[0, 1].map((_, dupIdx) => (
                 <div
                   key={dupIdx}
-                  className="flex shrink-0 gap-12 items-center animate-marquee pr-12"
+                  className="flex shrink-0 items-center justify-around gap-12 px-12 min-w-[100vw]"
                 >
                   {[
-                    { name: "Nexora", domain: "Logística" },
-                    { name: "Fluxio", domain: "Finanças" },
-                    { name: "Veloris", domain: "E-commerce" },
+                    { name: "Nexora",  domain: "Logística"   },
+                    { name: "Fluxio",  domain: "Finanças"    },
+                    { name: "Veloris", domain: "E-commerce"  },
                     { name: "Stratiq", domain: "Consultoria" },
-                    { name: "Orbita", domain: "SaaS" },
-                    { name: "Cladra", domain: "Indústria" },
-                    { name: "Pointex", domain: "Varejo" },
-                    { name: "Lumnix", domain: "Saúde" },
+                    { name: "Orbita",  domain: "SaaS"        },
+                    { name: "Cladra",  domain: "Indústria"   },
+                    { name: "Pointex", domain: "Varejo"      },
+                    { name: "Lumnix",  domain: "Saúde"       },
                   ].map((company, i) => (
-                    <div
-                      key={i}
-                      className="flex flex-col items-center gap-1 select-none group"
-                    >
+                    <div key={i} className="flex flex-col items-center gap-1 select-none group">
                       <span className="text-base font-semibold tracking-tight
                                       text-zinc-500 dark:text-zinc-200
                                       group-hover:text-zinc-500 dark:group-hover:text-zinc-400
@@ -260,7 +257,8 @@ export default function CompanyLandingPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </div>          
+        </div>
         </section>
 
       <hr className="border-zinc-200 dark:border-white/[0.07]" />
