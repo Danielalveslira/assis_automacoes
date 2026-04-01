@@ -199,57 +199,62 @@ export default function AutomacoesPage() {
 
           {/* Stats grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-px border border-red-900/30 bg-red-900/20 mt-2">
-            {/* Regular cards — first 4 */}
+
+            {/* Cards regulares */}
             {results.filter(r => !r.highlight).map((r, i) => (
               <div
                 key={i}
-                className="relative flex flex-col justify-between p-5 group transition-all duration-300 overflow-hidden
-                           bg-white/90 dark:bg-zinc-950/90 hover:bg-red-50 dark:hover:bg-red-950/30"
+                className="relative flex flex-col justify-between p-3 sm:p-5 group transition-all duration-300 overflow-hidden
+                          bg-white/90 dark:bg-zinc-950/90 hover:bg-red-50 dark:hover:bg-red-950/30"
               >
                 <div className="absolute top-0 left-0 w-0 h-0 border-t-[18px] border-l-[18px] border-t-red-600/40 border-l-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="font-black tabular-nums leading-none mb-3 block text-red-500 text-2xl sm:text-3xl group-hover:text-red-400 transition-colors">
+                <span className="font-black tabular-nums leading-none mb-2 sm:mb-3 block text-red-500 text-xl sm:text-3xl group-hover:text-red-400 transition-colors">
                   {r.number}
                 </span>
-                <span className="text-[10px] sm:text-xs leading-snug whitespace-pre-line font-medium tracking-wide text-zinc-500">
+                <span className="text-[9px] sm:text-xs leading-snug whitespace-pre-line font-medium tracking-wide text-zinc-500">
                   {r.label}
                 </span>
                 <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-600 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
               </div>
             ))}
 
-              {/* Highlight card — compact single-line strip */}
-              {results.filter(r => r.highlight).map((r, i) => (
-                <div
-                  key={i}
-                  className="relative col-span-2 lg:col-span-4 flex items-center gap-3 sm:gap-6
-                            px-4 sm:px-8 py-4 bg-red-600 overflow-hidden"
-                >
-                  {/* slash deco */}
-                  <div className="absolute right-0 top-0 w-48 h-full opacity-10 pointer-events-none"
-                    style={{ background: "linear-gradient(135deg, transparent 40%, #fff 40%, #fff 42%, transparent 42%)" }}
-                  />
+          {/* Strip highlight — linha única responsiva */}
+          {results.filter(r => r.highlight).map((r, i) => (
+            <div
+              key={i}
+              className="relative col-span-2 lg:col-span-4 flex items-center gap-2 sm:gap-5
+                        px-3 sm:px-8 py-3 sm:py-4 bg-red-600 overflow-hidden"
+            >
+              {/* slash deco */}
+              <div
+                className="absolute right-0 top-0 w-48 h-full opacity-10 pointer-events-none"
+                style={{ background: "linear-gradient(135deg, transparent 40%, #fff 40%, #fff 42%, transparent 42%)" }}
+              />
 
-                  {/* ícone — some no mobile menor */}
-                  <span className="hidden sm:inline text-white/70 text-lg shrink-0">⏱</span>
-                  <div className="hidden sm:block w-px h-6 bg-red-400/60 shrink-0" />
+              {/* ícone + divisor — só desktop */}
+              <span className="hidden sm:inline text-white/70 text-base shrink-0">⏱</span>
+              <div className="hidden sm:block w-px h-5 bg-red-400/60 shrink-0" />
 
-                  {/* número */}
-                  <span className="font-black tabular-nums text-white text-xl sm:text-3xl tracking-tighter leading-none shrink-0 whitespace-nowrap">
-                    {r.number}
-                  </span>
+              {/* número */}
+              <span className="font-black tabular-nums text-white text-lg sm:text-3xl tracking-tighter leading-none shrink-0">
+                {r.number}
+              </span>
 
-                  {/* label — em mobile fica em linha única com nowrap */}
-                  <span className="text-red-100 text-[11px] sm:text-sm font-medium tracking-wide leading-tight whitespace-nowrap overflow-hidden text-ellipsis">
-                    de horas economizadas por ano
-                  </span>
+              {/* divisor mobile entre número e label */}
+              <div className="block sm:hidden w-px h-4 bg-red-400/60 shrink-0" />
 
-                  {/* badge — some em mobile pequeno */}
-                  <span className="hidden sm:inline ml-auto shrink-0 text-[9px] font-black tracking-[0.25em] uppercase
-                                  border border-white/30 text-white/80 px-3 py-1">
-                    impacto real
-                  </span>
-                </div>
-              ))}
+              {/* label — wrap natural, sem truncar */}
+              <span className="text-red-100 text-[10px] sm:text-sm font-medium tracking-wide leading-snug">
+                de horas economizadas por ano
+              </span>
+
+              {/* badge — só desktop */}
+              <span className="hidden sm:inline ml-auto shrink-0 text-[9px] font-black tracking-[0.25em] uppercase
+                              border border-white/30 text-white/80 px-3 py-1">
+                impacto real
+              </span>
+            </div>
+          ))}
           </div>
         </div>
 
@@ -323,11 +328,11 @@ export default function AutomacoesPage() {
 
                 {/* Description */}
                 <div className="col-span-12 sm:col-span-5 sm:col-start-6">
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                  <p className="text-zinc-500 dark:text-zinc-100 text-sm leading-relaxed">
                     {sol.description}
                   </p>
                   <p
-                    className="text-red-400/80 text-xs mt-3 leading-relaxed transition-all duration-300"
+                    className="text-red-100/80 text-xs mt-3 leading-relaxed transition-all duration-300"
                     style={{ opacity: activeCard === i ? 1 : 0.4 }}
                   >
                     📌 {sol.impact}
@@ -392,7 +397,7 @@ export default function AutomacoesPage() {
 
       {/* ── DIFERENCIAIS ── */}
       <section className="px-6 sm:px-12 lg:px-24 py-16">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800/40">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-px bg-zinc-100 dark:bg-zinc-800/40">
           {[
             {
               label: "Resultado de negócio",
@@ -423,7 +428,7 @@ export default function AutomacoesPage() {
                   <h4 className="text-zinc-900 dark:text-white font-bold text-sm tracking-wide mb-1">
                     {d.label}
                   </h4>
-                  <p className="text-zinc-500 text-xs leading-relaxed">
+                  <p className="text-zinc-300 text-xs leading-relaxed">
                     {d.desc}
                   </p>
                 </div>
