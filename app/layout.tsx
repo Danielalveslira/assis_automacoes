@@ -1,4 +1,5 @@
 import { Analytics } from "@vercel/analytics/next";
+import MobileMenu from "@/components/MobileMenu";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Link from "next/link";
@@ -33,75 +34,7 @@ export default function RootLayout({
 
               {/* ── MOBILE ── */}
               <div className="md:hidden h-full">
-                <div className="flex items-center justify-between h-full">
-
-                  {/* Logo */}
-                  <Link href="/" className="flex flex-col leading-tight">
-                    <span className="font-bold tracking-[0.22em] uppercase text-base
-                                     bg-gradient-to-r from-zinc-900 to-blue-600
-                                     dark:from-white dark:to-blue-300
-                                     bg-clip-text text-transparent">
-                      Evocorp
-                    </span>
-                    <span className="text-xs text-zinc-400 dark:text-zinc-500 tracking-wide">
-                      Evolução Digital.
-                    </span>
-                  </Link>
-
-                  {/* Right: theme + hamburger */}
-                  <label
-                    htmlFor="mobile-menu"
-                    className="flex items-center gap-3 p-2 rounded-md cursor-pointer
-                               text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300
-                               transition-colors"
-                  >
-                    <span className="sr-only">Abrir menu</span>
-                    <ThemeToggle />
-                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                  </label>
-                </div>
-
-                <input type="checkbox" id="mobile-menu" className="hidden peer" />
-
-                {/* Mobile dropdown */}
-                <div className="hidden peer-checked:block
-                                border-t border-zinc-200 dark:border-white/[0.07]
-                                bg-zinc-50/95 dark:bg-zinc-950/95 backdrop-blur-xl">
-                  <div className="px-4 py-4 flex flex-col gap-1">
-                    <Link
-                      href="/blog"
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
-                                 text-zinc-600 dark:text-zinc-300
-                                 hover:bg-zinc-100 dark:hover:bg-zinc-800
-                                 hover:text-blue-600 dark:hover:text-blue-400
-                                 transition-colors"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round"
-                              d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z"/>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 4v6h6"/>
-                      </svg>
-                      Blog
-                    </Link>
-
-                    <Link
-                      href="/automacoes"
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
-                                 text-zinc-600 dark:text-zinc-300
-                                 hover:bg-zinc-100 dark:hover:bg-zinc-800
-                                 hover:text-red-600 dark:hover:text-red-400
-                                 transition-colors"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" />
-                      </svg>
-                      Automações
-                    </Link>
-                  </div>
-                </div>
+                <MobileMenu />
               </div>
 
               {/* ── DESKTOP ── */}
