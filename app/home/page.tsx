@@ -197,6 +197,72 @@ export default function CompanyLandingPage() {
         </div>
       </section>
 
+            <hr className="border-zinc-200 dark:border-white/[0.07]" />
+
+
+      {/* ── EMPRESAS QUE CONFIAM ─────────────────────────────── */}
+        <section className="py-16 overflow-hidden border-y border-zinc-100 dark:border-zinc-800/60">
+          <div className="mb-10 px-6 max-w-6xl mx-auto">
+            <span className="font-sans text-[0.7rem] tracking-[0.3em] uppercase block mb-2
+                            text-blue-600 dark:text-blue-300">
+              Clientes
+            </span>
+            <h2 className="text-3xl md:text-4xl font-normal tracking-tight
+                          text-zinc-900 dark:text-zinc-100">
+              Empresas que confiam em nós
+            </h2>
+          </div>
+
+          {/* Faixa rolante */}
+          <div className="relative">
+            {/* Fade esquerda */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 z-10
+                            bg-gradient-to-r from-white dark:from-zinc-950 to-transparent pointer-events-none" />
+            {/* Fade direita */}
+            <div className="absolute right-0 top-0 bottom-0 w-32 z-10
+                            bg-gradient-to-l from-white dark:from-zinc-950 to-transparent pointer-events-none" />
+
+            <div className="flex gap-0 overflow-hidden">
+              {/* Duplicamos 3x para loop contínuo sem pulo */}
+              {[0, 1, 2].map((_, dupIdx) => (
+                <div
+                  key={dupIdx}
+                  className="flex shrink-0 gap-12 items-center animate-marquee pr-12"
+                >
+                  {[
+                    { name: "Nexora", domain: "Logística" },
+                    { name: "Fluxio", domain: "Finanças" },
+                    { name: "Veloris", domain: "E-commerce" },
+                    { name: "Stratiq", domain: "Consultoria" },
+                    { name: "Orbita", domain: "SaaS" },
+                    { name: "Cladra", domain: "Indústria" },
+                    { name: "Pointex", domain: "Varejo" },
+                    { name: "Lumnix", domain: "Saúde" },
+                  ].map((company, i) => (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center gap-1 select-none group"
+                    >
+                      <span className="text-base font-semibold tracking-tight
+                                      text-zinc-500 dark:text-zinc-200
+                                      group-hover:text-zinc-500 dark:group-hover:text-zinc-400
+                                      transition-colors duration-200 whitespace-nowrap">
+                        {company.name}
+                      </span>
+                      <span className="text-[10px] tracking-[0.15em] uppercase
+                                      text-zinc-500 dark:text-zinc-400
+                                      group-hover:text-zinc-400 dark:group-hover:text-zinc-500
+                                      transition-colors duration-200">
+                        {company.domain}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
       <hr className="border-zinc-200 dark:border-white/[0.07]" />
 
       {/* ── CONTATO + MAPA ──────────────────────────────── */}
@@ -211,7 +277,7 @@ export default function CompanyLandingPage() {
             </span>
             <h2 className="text-2xl md:text-3xl font-normal tracking-tight leading-snug mb-3
                            text-zinc-900 dark:text-zinc-100">
-              Venha tomar um café com a gente
+              Venha tomar um café conosco
             </h2>
             <p className="font-sans text-sm font-light leading-relaxed mb-8
                           text-zinc-500 dark:text-zinc-400">

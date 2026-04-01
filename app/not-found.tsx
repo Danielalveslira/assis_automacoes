@@ -5,33 +5,68 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <div className="dark:bg-zinc-900 bg-white min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen bg-white dark:bg-zinc-950 flex items-center justify-center px-6">
       <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 100,
-          damping: 10,
-          duration: 0.6,
-        }}
-        className="max-w-xl mx-auto text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-sm w-full"
       >
-        <h1 className="text-6xl font-bold text-gray-900 dark:text-white mb-4">
-          404
-        </h1>
-        <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-          Página não encontrada
-        </h2>
-        <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
-          A página que você procura não existe ou foi removida. 🤝
-        </p>
-        <Link
-          href="/"
-          className="inline-flex items-center px-6 py-3 text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+        {/* 404 */}
+        <motion.p
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="text-[11px] tracking-[0.2em] uppercase text-zinc-400 dark:text-zinc-600 mb-8"
         >
-          <ArrowLeft className="mr-2" size={20} /> Voltar para a página inicial
-        </Link>
+          Erro 404
+        </motion.p>
+
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="text-2xl font-medium text-zinc-800 dark:text-zinc-100 tracking-tight mb-3"
+        >
+          Página não encontrada
+        </motion.h1>
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10"
+        >
+          A página que você procura não existe ou foi movida.
+        </motion.p>
+
+        {/* Divider */}
+        <motion.div
+          initial={{ scaleX: 0, originX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.5, delay: 0.35 }}
+          className="h-px bg-zinc-100 dark:bg-zinc-800 mb-10"
+        />
+
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.45 }}
+        >
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200"
+          >
+            <ArrowLeft
+              size={14}
+              className="group-hover:-translate-x-0.5 transition-transform duration-200"
+            />
+            Voltar ao início
+          </Link>
+        </motion.div>
       </motion.div>
     </div>
   );

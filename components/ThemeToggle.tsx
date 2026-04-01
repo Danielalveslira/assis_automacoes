@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme(); // ✅ resolvedTheme aqui
 
   useEffect(() => {
     setMounted(true);
@@ -17,11 +17,11 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} // ✅
       className="rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-      aria-label={theme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+      aria-label={resolvedTheme === 'dark' ? 'Mudar para tema claro' : 'Mudar para tema escuro'} // ✅
     >
-      {theme === 'dark' ? (
+      {resolvedTheme === 'dark' ? ( // ✅
         <svg className="w-5 h-5 text-gray-400 hover:text-gray-300" fill="currentColor" viewBox="0 0 20 20">
           <path
             fillRule="evenodd"
@@ -36,4 +36,4 @@ export function ThemeToggle() {
       )}
     </button>
   );
-} 
+}
