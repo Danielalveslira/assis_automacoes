@@ -21,7 +21,7 @@ export default function CompanyLandingPage() {
 
   const contacts = [
     { icon: "📍", label: "Endereço", val: "R. Francisca Rodrigues, 164 — Tota Barbosa\nSão Miguel — RN" },
-    { icon: "✉️", label: "Email",    val: "contato@evocorp.com" },
+    { icon: "✉️", label: "Email",    val: "contato@assis_site.com" },
     { icon: "📞", label: "Telefone", val: "(84) 9 9690-0941" },
   ];
 
@@ -311,8 +311,8 @@ export default function CompanyLandingPage() {
                           border border-zinc-200 dark:border-white/[0.07]
                           bg-zinc-100 dark:bg-zinc-900">
             <iframe
-              title="Mapa de Localização EVOCORP"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d665.8147428054174!2d-38.49211970548311!3d-6.205418992453185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a4ae2eeb43d20f%3A0x3a15c3a233d83bb!2sEVOCORP!5e1!3m2!1spt-BR!2sbr!4v1774974758960!5m2!1spt-BR!2sbr"
+              title="Mapa de Localização assis_site"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d665.8147428054174!2d-38.49211970548311!3d-6.205418992453185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a4ae2eeb43d20f%3A0x3a15c3a233d83bb!2sassis_site!5e1!3m2!1spt-BR!2sbr!4v1774974758960!5m2!1spt-BR!2sbr"
               width="100%" height="100%"
               style={{ border: 0 }}
               allowFullScreen loading="lazy"

@@ -142,7 +142,7 @@ export default function AutomacoesPage() {
         {/* Top label */}
         <div className="absolute top-8 left-6 sm:left-12 lg:left-24 flex items-center gap-3">
           <span className="text-red-500 text-xs tracking-[0.4em] uppercase">
-            Evocorp
+            assis_site
           </span>
           <span className="text-zinc-400 dark:text-zinc-700 text-xs">///</span>
           <span className="text-zinc-400 dark:text-zinc-500 text-xs tracking-[0.3em] uppercase">
@@ -463,7 +463,7 @@ export default function AutomacoesPage() {
           </p>
 
           <a
-            href="mailto:contato@evocorp.com.br"
+            href="mailto:contato@assis_site.com.br"
             className="inline-flex items-center gap-4 bg-red-600 hover:bg-red-500 text-white
                        font-black text-xs sm:text-sm tracking-[0.3em] uppercase
                        px-10 py-5 transition-all duration-200

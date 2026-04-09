@@ -42,7 +42,7 @@ export default function MobileMenu() {
         {/* Logo */}
         <Link href="/" className="flex flex-col leading-tight" onClick={closeMenu}>
           <span className="font-bold tracking-[0.22em] uppercase text-base bg-gradient-to-r from-zinc-900 to-blue-600 dark:from-white dark:to-blue-300 bg-clip-text text-transparent">
-            Evocorp
+            assis_site
           </span>
           <span className="text-xs text-zinc-400 dark:text-zinc-500 tracking-wide">
             Evolução Digital.
