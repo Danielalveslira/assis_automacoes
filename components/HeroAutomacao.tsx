@@ -126,11 +126,45 @@ export default function HeroAutomacao() {
               className="absolute left-0 top-0 w-px h-24 bg-red-600 z-20 hidden md:block"
             />
 
+            {/* Logo em background — atrás da foto */}
+            <div className="
+              hidden md:flex items-center justify-center
+              absolute z-0
+              inset-0
+              animate-[fadeUp_0.7s_0.9s_both]
+            ">
+              <div className="relative">
+                {/* Glow sutil da logo */}
+                <div
+                  aria-hidden
+                  className="
+                    absolute inset-0 -m-16
+                    bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.15),transparent_60%)]
+                    blur-3xl
+                  "
+                />
+                <img
+                  src="/clara.png"
+                  alt=""
+                  aria-hidden
+                  className="
+                    relative w-64 lg:w-80 xl:w-96 h-auto
+                    opacity-[0.08] dark:opacity-[0.12]
+                    blur-[1px]
+                    grayscale
+                    pointer-events-none
+                    select-none
+                  "
+                />
+              </div>
+            </div>
+
             {/* Imagem: cobre todo o espaço, sem border-radius no lado direito */}
             <div className="
               absolute inset-0
               overflow-hidden
               rounded-none
+              z-[1]
             ">
               <img
                 src="/assis_semfundo.png"
@@ -144,15 +178,19 @@ export default function HeroAutomacao() {
                 "
               />
 
-              {/* Overlay gradiente: esquerda (integração com a seção) + base escura */}
+              {/* Overlay gradiente: esquerda (integração com a seção) */}
               <div className="
                 absolute inset-0
                 bg-gradient-to-r from-white/80 via-white/10 to-transparent
                 dark:from-zinc-950/90 dark:via-zinc-950/20 dark:to-transparent
               " />
+              
+              {/* Overlay gradiente: CLARO em cima → ESCURO embaixo */}
               <div className="
                 absolute inset-0
-                bg-gradient-to-t from-black/75 via-black/10 to-transparent
+                bg-gradient-to-b 
+                from-white/60 via-transparent to-black/80
+                dark:from-zinc-950/50 dark:via-transparent dark:to-black/90
               " />
 
             </div>
@@ -189,7 +227,8 @@ export default function HeroAutomacao() {
           .animate-\\[fadeUp_0\\.7s_0\\.4s_both\\],
           .animate-\\[fadeUp_0\\.7s_0\\.5s_both\\],
           .animate-\\[fadeUp_0\\.7s_0\\.55s_both\\],
-          .animate-\\[fadeUp_0\\.7s_0\\.7s_both\\] {
+          .animate-\\[fadeUp_0\\.7s_0\\.7s_both\\],
+          .animate-\\[fadeUp_0\\.7s_0\\.9s_both\\] {
             animation: none !important;
           }
         }
