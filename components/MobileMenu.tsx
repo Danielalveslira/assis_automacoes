@@ -45,14 +45,14 @@ export default function MobileMenu() {
             assis_site
           </span>
           <span className="text-xs text-zinc-400 dark:text-zinc-500 tracking-wide">
-            Evolução Digital.
+            Decidir uma frase
           </span>
         </Link>
 
         {/* Grupo à direita: ThemeToggle + Botão hamburger */}
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <button
+          {/* <button
             ref={buttonRef}
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 rounded-md cursor-pointer text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
@@ -61,7 +61,7 @@ export default function MobileMenu() {
             <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-          </button>
+          </button> */}
         </div>
       </div>
 
@@ -77,7 +77,7 @@ export default function MobileMenu() {
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
-        <div className="px-4 py-4 flex flex-col gap-1">
+        {/* <div className="px-4 py-4 flex flex-col gap-1">
           <Link
             href="/blog"
             className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -100,7 +100,7 @@ export default function MobileMenu() {
             </svg>
             Automações
           </Link>
-        </div>
+        </div> */}
       </div>
     </>
   );

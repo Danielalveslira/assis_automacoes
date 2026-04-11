@@ -1,151 +1,139 @@
-import { Analytics } from "@vercel/analytics/next";
-import MobileMenu from "@/components/MobileMenu";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter, Instrument_Serif } from "next/font/google";
 import Link from "next/link";
+import { Analytics } from "@vercel/analytics/next";
+
+import MobileMenu from "@/components/MobileMenu";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
+
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// ── FONTS ────────────────────────────────────────────────
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
 
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+  variable: "--font-serif",
+});
+
+// ── METADATA ─────────────────────────────────────────────
 export const metadata: Metadata = {
-  title: "assis_site - Evolução Digital",
-  description: "Consultoria e assessoria empresarial para sua evolução digital.",
+  title: {
+    default: "assis_site — Decidindo frase",
+    template: "%s — assis_site",
+  },
+  description:
+    "Consultoria, automação de dados e assessoria empresarial para sua evolução digital.",
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
+};
+
+const CURRENT_YEAR = new Date().getFullYear();
+
+// ── ROOT LAYOUT ──────────────────────────────────────────
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
-      <body
-        className={`${inter.className} bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased min-h-screen flex flex-col`}
-      >
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${inter.variable} ${serif.variable}`}
+    >
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-red-600 selection:text-white transition-colors duration-300">
         <ThemeProvider>
-
-          {/* ── NAV ──────────────────────────────────────────── */}
-           <nav className="fixed top-0 inset-x-0 z-50 h-16
-                          bg-zinc-50/85 dark:bg-zinc-950/85 backdrop-blur-xl
-                          border-b border-zinc-200 dark:border-white/[0.07]">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
-
-              <div className="md:hidden h-full">
-                <MobileMenu />
-              </div>
-
-              <div className="hidden md:flex items-center justify-between h-full">
-
-                <Link href="/" className="flex flex-col leading-tight group">
-                  <span className="font-bold tracking-[0.22em] uppercase text-base
-                                   bg-gradient-to-r from-zinc-900 to-blue-600
-                                   dark:from-white dark:to-blue-300
-                                   bg-clip-text text-transparent
-                                   transition-opacity group-hover:opacity-80">
-                    assis_site
-                  </span>
-                  <span className="text-xs text-zinc-400 dark:text-zinc-500 tracking-wide">
-                    Evolução Digital.
-                  </span>
-                </Link>
-
-                <div className="flex items-center gap-6">
-
-                   {/* Nav links */}
-                   {/* <Link
-                    href="/blog"
-                    className="font-sans text-sm font-medium tracking-wide
-                               text-zinc-500 dark:text-zinc-400
-                               hover:text-zinc-900 dark:hover:text-zinc-100
-                               transition-colors"
-                  >
-                    Blog
-                  </Link> 
-
-                  <Link
-                      href="/automacoes"
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium
-                                 text-zinc-600 dark:text-zinc-300
-                                 hover:bg-zinc-100 dark:hover:bg-zinc-800
-                                 hover:text-red-600 dark:hover:text-red-400
-                                 transition-colors"
-                    >
-                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" />
-                      </svg>
-                      Automações
-                  </Link>
-
-                  <div className="w-px h-4 bg-zinc-200 dark:bg-white/10" />
-
-                  <a
-                    href="https://github.com/Danielalveslira"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-zinc-400 dark:text-zinc-500
-                               hover:text-zinc-700 dark:hover:text-zinc-300
-                               transition-colors"
-                    aria-label="GitHub"
-                  >
-                    <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                      <path fillRule="evenodd"
-                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                            clipRule="evenodd" />
-                    </svg>
-                  </a> */}
-
-                  <ThemeToggle />
-                </div>
-              </div>
-
-            </div>
-          </nav>
-
-          {/* Push content below fixed nav */}
-          <main className="flex-grow pt-16">{children}</main>
-
-          {/* ── FOOTER ───────────────────────────────────────── */}
-          <footer className="border-t border-zinc-200 dark:border-white/[0.07]
-                            bg-zinc-50/85 dark:bg-zinc-950/85 backdrop-blur-xl">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5
-                            flex flex-col sm:flex-row items-center justify-between gap-3">
-
-              {/* Brand — igual ao nav */}
-              <Link href="/" className="flex flex-col leading-tight">
-                <span className="font-bold tracking-[0.22em] uppercase text-sm
-                                bg-gradient-to-r from-zinc-900 to-blue-600
-                                dark:from-white dark:to-blue-300
-                                bg-clip-text text-transparent">
-                  assis_site
-                </span>
-                <span className="text-[10px] text-zinc-400 dark:text-zinc-500 tracking-wide">
-                  Evolução Digital.
-                </span>
-              </Link>
-
-              {/* Copy */}
-              <p className="font-sans text-xs text-zinc-400 dark:text-zinc-600 tracking-wide">
-                © {new Date().getFullYear()} assis_site — Todos os direitos reservados
-              </p>
-
-              {/* Link */}
-              <Link
-                href="/faq"
-                className="font-sans text-xs text-zinc-400 dark:text-zinc-500 tracking-[0.2em] uppercase
-                          hover:text-blue-600 dark:hover:text-blue-400
-                          transition-colors duration-200"
-              >
-                FAQ
-              </Link>
-
-            </div>
-          </footer>
-
+          <SiteNav />
+          {/* pt-20 compensa a altura do nav flutuante (52px) + margem top (16px) */}
+          <main className="flex-grow pt-20">{children}</main>
+          <SiteFooter />
         </ThemeProvider>
         <Analytics />
       </body>
     </html>
+  );
+}
+
+// ── NAV ──────────────────────────────────────────────────
+// Floating pill nav — flutua sobre o conteúdo com backdrop blur.
+// Centrado horizontalmente, com largura máxima igual ao restante do site.
+function SiteNav() {
+  return (
+    <header className="fixed inset-x-0 top-4 z-50 px-4 sm:px-6 lg:px-8">
+      <nav className="
+        max-w-6xl mx-auto h-[52px] px-5
+        flex items-center justify-between
+        bg-white/90 dark:bg-zinc-950/90
+        backdrop-blur-md
+        border border-zinc-200 dark:border-white/10
+        rounded-2xl
+        transition-colors duration-300
+      ">
+        {/* Mobile: Brand à esquerda, Toggle + Menu à direita */}
+        <div className="flex md:hidden items-center justify-between w-full">
+          <Brand />
+          <div className="flex items-center gap-1">
+            <ThemeToggle />
+            {/* <MobileMenu /> */}
+          </div>
+        </div>
+
+        {/* Desktop: Brand à esquerda, Toggle à direita */}
+        <div className="hidden md:flex items-center justify-between w-full">
+          <Brand />
+          <ThemeToggle />
+        </div>
+      </nav>
+    </header>
+  );
+}
+
+// ── FOOTER ───────────────────────────────────────────────
+function SiteFooter() {
+  return (
+    <footer className="border-t border-zinc-200 dark:border-white/10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <Brand size="sm" />
+
+        <p className="font-sans text-xs text-zinc-500 dark:text-zinc-600 tracking-wide">
+          © {CURRENT_YEAR} assis_site — Todos os direitos reservados
+        </p>
+
+        <Link
+          href="/faq"
+          className="font-sans text-xs tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200"
+        >
+          FAQ
+        </Link>
+      </div>
+    </footer>
+  );
+}
+
+// ── BRAND ────────────────────────────────────────────────
+function Brand({ size = "md" }: { size?: "sm" | "md" }) {
+  const titleSize = size === "sm" ? "text-base" : "text-lg";
+  const tagSize   = size === "sm" ? "text-[9px]" : "text-[10px]";
+
+  return (
+    <Link href="/" className="flex flex-col leading-tight group">
+      <span className={`font-serif font-normal tracking-tight ${titleSize} text-zinc-900 dark:text-zinc-100 group-hover:opacity-75 transition-opacity duration-200`}>
+        assis<span className="text-red-600 dark:text-red-500">_</span>site
+      </span>
+      <span className={`font-sans ${tagSize} tracking-[0.22em] uppercase text-zinc-500 dark:text-zinc-500`}>
+        Decidir frase de impacto
+      </span>
+    </Link>
   );
 }
