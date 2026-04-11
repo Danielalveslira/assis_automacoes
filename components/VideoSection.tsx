@@ -22,7 +22,7 @@ const VIDEOS: Video[] = [
     title: 'De planilha manual para dashboard em tempo real',
     desc: 'Coleta, tratamento e entrega automática de dados sem uma linha de código manual.',
     duration: '12:47',
-    src: "https://www.youtube.com/embed/=lEXBxijQREo?autoplay=1"
+    src: "https://www.youtube-nocookie.com/embed/jNQXAC9IVRw?autoplay=1"
   },
   {
     id: 'v2',
