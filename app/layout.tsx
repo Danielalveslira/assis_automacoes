@@ -2,8 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Instrument_Serif } from "next/font/google";
 import Link from "next/link";
 import { Analytics } from "@vercel/analytics/next";
+import Image from "next/image";
 
-import MobileMenu from "@/components/MobileMenu";
+// import MobileMenu from "@/components/MobileMenu";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -125,15 +126,52 @@ function SiteFooter() {
 function Brand({ size = "md" }: { size?: "sm" | "md" }) {
   const titleSize = size === "sm" ? "text-base" : "text-lg";
   const tagSize   = size === "sm" ? "text-[9px]" : "text-[10px]";
+  const logoSize  = size === "sm" ? 28 : 36;
 
   return (
-    <Link href="/" className="flex flex-col leading-tight group">
-      <span className={`font-serif font-normal tracking-tight ${titleSize} text-zinc-900 dark:text-zinc-100 group-hover:opacity-75 transition-opacity duration-200`}>
-        assis<span className="text-red-600 dark:text-red-500">_</span>site
-      </span>
-      <span className={`font-sans ${tagSize} tracking-[0.22em] uppercase text-zinc-500 dark:text-zinc-500`}>
-        Decidir frase de impacto
-      </span>
+    <Link
+      href="/"
+      className="flex items-center gap-2.5 group"
+      aria-label="assis_site — Página inicial"
+    >
+      {/* Logo — troca conforme o tema */}
+      <div
+        className="relative shrink-0"
+        style={{ width: logoSize, height: logoSize }}
+      >
+        {/* Light mode */}
+        <Image
+          src="/clara.png"
+          alt="assis_site logo"
+          fill
+          sizes={`${logoSize}px`}
+          priority
+          className="object-contain block dark:hidden"
+        />
+        {/* Dark mode */}
+        <Image
+          src="/dark.png"
+          alt="assis_site logo"
+          fill
+          sizes={`${logoSize}px`}
+          priority
+          className="object-contain hidden dark:block"
+        />
+      </div>
+
+      {/* Texto da brand */}
+      <div className="flex flex-col leading-tight">
+        <span
+          className={`font-serif font-normal tracking-tight ${titleSize} text-zinc-900 dark:text-zinc-100 group-hover:opacity-75 transition-opacity duration-200`}
+        >
+          Assis Luciano
+        </span>
+        <span
+          className={`font-sans ${tagSize} tracking-[0.22em] uppercase text-zinc-500 dark:text-zinc-500`}
+        >
+          Decidir frase de impacto
+        </span>
+      </div>
     </Link>
   );
 }
