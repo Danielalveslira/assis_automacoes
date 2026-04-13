@@ -70,15 +70,6 @@ export default function HeroAutomacao() {
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-3 mb-14 animate-[fadeUp_0.7s_0.55s_both]">
-                <a
-                  href="#contato"
-                  className="font-sans inline-flex items-center gap-2 px-6 py-3 rounded-md bg-red-600 hover:bg-red-500 text-white text-sm font-medium tracking-wide transition-colors duration-200"
-                >
-                  Quero automatizar
-                  <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </a>
                 <button
                   onClick={() =>
                     document.getElementById('servicos')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -86,7 +77,17 @@ export default function HeroAutomacao() {
                   className="font-sans inline-flex items-center gap-2 px-6 py-3 rounded-md border border-zinc-300 hover:border-red-600 dark:border-white/15 dark:hover:border-red-500 text-zinc-700 hover:text-red-600 dark:text-zinc-300 dark:hover:text-white text-sm font-medium tracking-wide transition-colors duration-200"
                 >
                   Ver serviços
+                  <svg width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
                 </button>
+
+                <a
+                  href="/faq"
+                  className="font-sans inline-flex items-center gap-2 px-6 py-3 rounded-md border border-zinc-300 hover:border-red-600 dark:border-white/15 dark:hover:border-red-500 text-zinc-700 hover:text-red-600 dark:text-zinc-300 dark:hover:text-white text-sm font-medium tracking-wide transition-colors duration-200"
+                >
+                  Ver FAQ
+                </a>
               </div>
 
               {/* Métricas */}
