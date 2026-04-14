@@ -8,6 +8,7 @@ import Image from "next/image";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
+
 import "./globals.css";
 
 // ── FONTS ────────────────────────────────────────────────

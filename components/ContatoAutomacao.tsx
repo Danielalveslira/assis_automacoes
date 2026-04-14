@@ -1,8 +1,9 @@
 // components/ContatoAutomacao.tsx
 'use client';
 
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, useCallback } from 'react';
 import emailjs from '@emailjs/browser';
+import confetti from 'canvas-confetti';
 
 // ══════════════════════════════════════════════════════════════
 // CONFIGURAÇÃO EMAILJS — Substitua pelos seus valores
@@ -28,6 +29,40 @@ export default function ContatoAutomacao() {
   const [focused, setFocused] = useState<string | null>(null);
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+
+  // ══════════════════════════════════════════════════════════════
+  // EFEITO DE CONFETE 🎉
+  // ══════════════════════════════════════════════════════════════
+  const fireConfetti = useCallback(() => {
+    // Explosão central
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#dc2626', '#ef4444', '#f87171', '#fca5a5', '#ffffff'],
+    });
+
+    // Explosões laterais com delay para efeito cascata
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.6 },
+        colors: ['#dc2626', '#ef4444', '#22c55e', '#ffffff'],
+      });
+    }, 150);
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 50,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.6 },
+        colors: ['#dc2626', '#ef4444', '#22c55e', '#ffffff'],
+      });
+    }, 300);
+  }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -63,6 +98,9 @@ export default function ContatoAutomacao() {
 
       setStatus('success');
       setForm({ nome: '', whatsapp: '', mensagem: '' });
+      
+      // 🎉 Dispara o confete!
+      fireConfetti();
       
       // Reset após 5 segundos
       setTimeout(() => setStatus('idle'), 5000);
