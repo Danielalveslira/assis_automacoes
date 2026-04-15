@@ -1,11 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback, memo, useMemo } from 'react';
+import { clsx } from 'clsx'; // Se não tiver, pode usar template literals simples
 
-// ═══════════════════════════════════════════════════════════════════════════
-// ✏️  EDITE APENAS AQUI - SUAS PERGUNTAS E RESPOSTAS
-// ═══════════════════════════════════════════════════════════════════════════
-
+// ✏️  EDITE APENAS AQUI PERGUNTAS E RESPOSTAS
 const faqData = [
   {
     pergunta: "O que é automação de dados e como ela pode ajudar minha empresa?",
@@ -31,233 +29,323 @@ const faqData = [
     pergunta: "Qual é o investimento para criar uma automação?",
     resposta: "O investimento depende do escopo e complexidade do projeto. Trabalho com propostas personalizadas após entender suas necessidades específicas. Ofereço desde pacotes acessíveis para pequenas automações até projetos enterprise completos. O mais importante: toda automação se paga rapidamente através da economia de tempo e recursos. Agende uma conversa gratuita para receber um orçamento sem compromisso."
   },
-];
+] as const;
 
-// ═══════════════════════════════════════════════════════════════════════════
 // 🚫  NÃO EDITE ABAIXO - LÓGICA E ESTILIZAÇÃO DO COMPONENTE
-// ═══════════════════════════════════════════════════════════════════════════
+
+const gridPatternStyle = {
+  backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+  backgroundSize: '24px 24px'
+} as const;
+
+const bgGridStyle = {
+  backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
+  backgroundSize: '60px 60px'
+} as const;
+
+const scanLineStyle = {
+  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
+} as const;
+
+// ÍCONES MEMOIZADOS
+
+const ChevronIcon = memo(function ChevronIcon({ isOpen }: { isOpen: boolean }) {
+  return (
+    <svg 
+      className={`w-5 h-5 transition-colors duration-300 ${isOpen ? 'text-red-500 dark:text-red-400' : 'text-zinc-400 dark:text-zinc-500'}`}
+      fill="none" 
+      viewBox="0 0 24 24" 
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+    </svg>
+  );
+});
+
+const QuestionIcon = memo(function QuestionIcon() {
+  return (
+    <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+  );
+});
+
+const ArrowLeftIcon = memo(function ArrowLeftIcon() {
+  return (
+    <svg 
+      className="w-4 h-4 transition-transform group-hover:-translate-x-1" 
+      fill="none" 
+      viewBox="0 0 24 24" 
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  );
+});
+
+// COMPONENTE FAQ ITEM MEMOIZADO
 
 interface FaqItemProps {
   index: number;
   pergunta: string;
   resposta: string;
   isOpen: boolean;
-  onClick: () => void;
+  onToggle: () => void;
 }
 
-const FaqItem = ({ index, pergunta, resposta, isOpen, onClick }: FaqItemProps) => {
+const FaqItem = memo(function FaqItem({ 
+  index, 
+  pergunta, 
+  resposta, 
+  isOpen, 
+  onToggle 
+}: FaqItemProps) {
+  // Classes computadas apenas quando isOpen muda
+  const containerClasses = isOpen 
+    ? 'bg-gradient-to-br from-zinc-100/90 via-zinc-100/70 to-red-50/50 dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-red-950/20 border-red-500/40 dark:border-red-600/40 shadow-lg shadow-red-200/30 dark:shadow-red-900/10' 
+    : 'bg-white/60 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/60 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700/60';
+
+  const sidebarClasses = isOpen 
+    ? 'bg-gradient-to-b from-red-500 via-red-600 to-red-700' 
+    : 'bg-zinc-200 dark:bg-zinc-800 group-hover:bg-zinc-300 dark:group-hover:bg-zinc-700';
+
+  const numberClasses = isOpen 
+    ? 'bg-red-600 text-white shadow-lg shadow-red-600/30' 
+    : 'bg-zinc-100 dark:bg-zinc-800/80 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800';
+
+  const titleClasses = isOpen 
+    ? 'text-zinc-900 dark:text-white' 
+    : 'text-zinc-700 dark:text-zinc-200 group-hover:text-zinc-900 dark:group-hover:text-white';
+
+  const toggleClasses = isOpen 
+    ? 'border-red-500/50 bg-red-100 dark:bg-red-600/20 rotate-180' 
+    : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50 group-hover:border-zinc-300 dark:group-hover:border-zinc-600';
+
+  const formattedIndex = useMemo(() => String(index + 1).padStart(2, '0'), [index]);
+
   return (
     <div 
-      className={`
-        group relative overflow-hidden
-        border rounded-2xl
-        transition-all duration-500 ease-out
-        ${isOpen 
-          ? 'bg-gradient-to-br from-zinc-100/90 via-zinc-100/70 to-red-50/50 dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-red-950/20 border-red-500/40 dark:border-red-600/40 shadow-lg shadow-red-200/30 dark:shadow-red-900/10' 
-          : 'bg-white/60 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/60 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 hover:border-zinc-300 dark:hover:border-zinc-700/60'
-        }
-      `}
+      className={`group relative overflow-hidden border rounded-2xl transition-all duration-500 ease-out ${containerClasses}`}
     >
-      {/* Linha decorativa lateral */}
+      {/* Linha decorativa lateral - usa transform ao invés de propriedades de layout */}
       <div 
-        className={`
-          absolute left-0 top-0 bottom-0 w-1 
-          transition-all duration-500 ease-out
-          ${isOpen 
-            ? 'bg-gradient-to-b from-red-500 via-red-600 to-red-700' 
-            : 'bg-zinc-200 dark:bg-zinc-800 group-hover:bg-zinc-300 dark:group-hover:bg-zinc-700'
-          }
-        `}
+        className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-500 ease-out ${sidebarClasses}`}
+        aria-hidden="true"
       />
 
-      {/* Grid pattern sutil quando aberto */}
+      {/* Grid pattern sutil quando aberto - renderização condicional */}
       {isOpen && (
         <div 
           className="absolute inset-0 opacity-[0.03] dark:opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '24px 24px'
-          }}
+          style={gridPatternStyle}
+          aria-hidden="true"
         />
       )}
 
       {/* Header clicável */}
       <button
-        onClick={onClick}
+        onClick={onToggle}
         className="w-full text-left p-6 md:p-8 flex items-start gap-4 md:gap-6 relative z-10"
+        aria-expanded={isOpen}
+        aria-controls={`faq-answer-${index}`}
       >
         {/* Número com estilo terminal */}
         <div 
-          className={`
-            flex-shrink-0 w-12 h-12 md:w-14 md:h-14
-            rounded-xl flex items-center justify-center
-            font-mono text-sm md:text-base font-bold
-            transition-all duration-500 ease-out
-            ${isOpen 
-              ? 'bg-red-600 text-white shadow-lg shadow-red-600/30' 
-              : 'bg-zinc-100 dark:bg-zinc-800/80 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-800'
-            }
-          `}
+          className={`flex-shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center font-mono text-sm md:text-base font-bold transition-all duration-500 ease-out ${numberClasses}`}
+          aria-hidden="true"
         >
           <span className="opacity-60 text-xs mr-0.5">&gt;</span>
-          {String(index + 1).padStart(2, '0')}
+          {formattedIndex}
         </div>
 
         {/* Pergunta */}
         <div className="flex-1 pt-1">
           <h3 
-            className={`
-              text-lg md:text-xl font-semibold leading-tight font-syne
-              transition-colors duration-300
-              ${isOpen ? 'text-zinc-900 dark:text-white' : 'text-zinc-700 dark:text-zinc-200 group-hover:text-zinc-900 dark:group-hover:text-white'}
-            `}
+            className={`text-lg md:text-xl font-semibold leading-tight font-syne transition-colors duration-300 ${titleClasses}`}
           >
             {pergunta}
           </h3>
         </div>
 
-        {/* Ícone de toggle */}
+        {/* Ícone de toggle - usa transform para animação (GPU accelerated) */}
         <div 
-          className={`
-            flex-shrink-0 w-10 h-10 rounded-full
-            flex items-center justify-center
-            border transition-all duration-500 ease-out
-            ${isOpen 
-              ? 'border-red-500/50 bg-red-100 dark:bg-red-600/20 rotate-180' 
-              : 'border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800/50 group-hover:border-zinc-300 dark:group-hover:border-zinc-600'
-            }
-          `}
+          className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-500 ease-out ${toggleClasses}`}
+          aria-hidden="true"
         >
-          <svg 
-            className={`w-5 h-5 transition-colors duration-300 ${isOpen ? 'text-red-500 dark:text-red-400' : 'text-zinc-400 dark:text-zinc-500'}`}
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
+          <ChevronIcon isOpen={isOpen} />
         </div>
       </button>
 
-      {/* Resposta com animação */}
+      {/* Resposta com animação usando grid para melhor performance */}
       <div 
-        className={`
-          overflow-hidden transition-all duration-500 ease-out
-          ${isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}
-        `}
+        id={`faq-answer-${index}`}
+        className="grid transition-all duration-500 ease-out"
+        style={{ 
+          gridTemplateRows: isOpen ? '1fr' : '0fr',
+          opacity: isOpen ? 1 : 0 
+        }}
+        aria-hidden={!isOpen}
       >
-        <div className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.5rem] md:pl-[6.5rem]">
-          {/* Linha separadora animada */}
-          <div className="relative h-px mb-6 overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
-            <div 
-              className={`
-                absolute inset-0 bg-gradient-to-r from-transparent via-red-500 to-transparent
-                transition-transform duration-700 ease-out
-                ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-              `}
-            />
-          </div>
+        <div className="overflow-hidden">
+          <div className="px-6 md:px-8 pb-6 md:pb-8 pl-[4.5rem] md:pl-[6.5rem]">
+            {/* Linha separadora animada */}
+            <div className="relative h-px mb-6 overflow-hidden" aria-hidden="true">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-zinc-300 dark:via-zinc-700 to-transparent" />
+              <div 
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500 to-transparent transition-transform duration-700 ease-out"
+                style={{ transform: isOpen ? 'translateX(0)' : 'translateX(-100%)' }}
+              />
+            </div>
 
-          {/* Texto da resposta */}
-          <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-base md:text-lg font-light">
-            {resposta}
-          </p>
+            {/* Texto da resposta */}
+            <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-base md:text-lg font-light">
+              {resposta}
+            </p>
 
-          {/* Tag decorativa */}
-          <div className="mt-6 flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/50 font-mono">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-xs text-zinc-500 dark:text-zinc-500">resposta.verified</span>
-            </span>
+            {/* Tag decorativa */}
+            <div className="mt-6 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/50 font-mono">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
+                <span className="text-xs text-zinc-500 dark:text-zinc-500">resposta.verified</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-};
+});
+
+// COMPONENTE BACKGROUND MEMOIZADO
+
+const PageBackground = memo(function PageBackground() {
+  return (
+    <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+      {/* Gradient orbs decorativos - usando will-change para GPU */}
+      <div className="absolute top-20 left-1/4 w-96 h-96 bg-red-400/10 dark:bg-red-600/5 rounded-full blur-3xl will-change-transform" />
+      <div className="absolute bottom-40 right-1/4 w-80 h-80 bg-red-400/10 dark:bg-red-600/5 rounded-full blur-3xl will-change-transform" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-400/5 dark:bg-red-600/[0.03] rounded-full blur-3xl will-change-transform" />
+
+      {/* Linhas de grade sutis */}
+      <div 
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]"
+        style={bgGridStyle}
+      />
+
+      {/* Scan line effect - apenas dark mode */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-0 dark:opacity-[0.015]"
+        style={scanLineStyle}
+      />
+    </div>
+  );
+});
+
+// COMPONENTE HEADER MEMOIZADO
+
+const PageHeader = memo(function PageHeader() {
+  return (
+    <header className="text-center mb-16 md:mb-20">
+      {/* Badge */}
+      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 mb-6 font-mono shadow-sm">
+        <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" aria-hidden="true" />
+        <span className="text-sm text-zinc-500 dark:text-zinc-400">faq.system</span>
+      </div>
+
+      {/* Título */}
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-white mb-6 font-syne">
+        Perguntas{' '}
+        <span className="relative inline-block">
+          <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-700 dark:from-red-400 dark:via-red-500 dark:to-red-600">
+            Frequentes
+          </span>
+          <span className="absolute -bottom-2 left-0 right-0 h-3 bg-red-500/20 dark:bg-red-600/20 blur-lg" aria-hidden="true" />
+        </span>
+      </h1>
+
+      {/* Subtítulo */}
+      <p className="text-zinc-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+        Tire suas dúvidas sobre automação de dados e como posso 
+        transformar os processos da sua empresa.
+      </p>
+
+      {/* Linha decorativa */}
+      <div className="flex items-center justify-center gap-3 mt-8" aria-hidden="true">
+        <div className="w-12 h-px bg-gradient-to-r from-transparent to-zinc-300 dark:to-zinc-700" />
+        <div className="w-2 h-2 rounded-full bg-red-600" />
+        <div className="w-12 h-px bg-gradient-to-l from-transparent to-zinc-300 dark:to-zinc-700" />
+      </div>
+    </header>
+  );
+});
+
+// COMPONENTE CTA MEMOIZADO
+
+const CtaSection = memo(function CtaSection() {
+  return (
+    <section className="mt-16 text-center">
+      <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60 backdrop-blur-sm shadow-lg shadow-zinc-200/50 dark:shadow-none">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg shadow-red-500/30 dark:shadow-red-900/30">
+            <QuestionIcon />
+          </div>
+          <div className="text-left">
+            <p className="text-zinc-900 dark:text-white font-semibold">Ainda tem dúvidas?</p>
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm">Vamos conversar sem compromisso</p>
+          </div>
+        </div>
+        <a 
+          href="/#contato" 
+          className="px-6 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-500 hover:to-red-600 transition-all duration-300 shadow-lg shadow-red-500/30 dark:shadow-red-900/30 hover:shadow-red-500/50 dark:hover:shadow-red-900/50 hover:-translate-y-0.5"
+        >
+          Falar com Assis
+        </a>
+      </div>
+    </section>
+  );
+});
+
+// COMPONENTE PRINCIPAL
 
 export default function FaqPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const handleToggle = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  // useCallback para evitar recriação da função a cada render
+  const handleToggle = useCallback((index: number) => {
+    setOpenIndex(prev => prev === index ? null : index);
+  }, []);
+
+  // Memoiza os handlers individuais para cada item
+  // Isso evita que todos os FaqItems re-renderizem quando apenas um abre/fecha
+  const toggleHandlers = useMemo(() => 
+    faqData.map((_, index) => () => handleToggle(index)),
+    [handleToggle]
+  );
 
   return (
     <main className="relative min-h-screen bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300">
-      {/* Background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Gradient orbs decorativos */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-red-400/10 dark:bg-red-600/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 right-1/4 w-80 h-80 bg-red-400/10 dark:bg-red-600/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-400/5 dark:bg-red-600/3 rounded-full blur-3xl" />
-
-        {/* Linhas de grade sutis */}
-        <div 
-          className="absolute inset-0 opacity-[0.03] dark:opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)`,
-            backgroundSize: '60px 60px'
-          }}
-        />
-
-        {/* Scan line effect - apenas dark mode */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-0 dark:opacity-[0.015]"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
-          }}
-        />
-      </div>
+      {/* Background elements - componente memoizado */}
+      <PageBackground />
 
       {/* Conteúdo principal */}
       <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 md:py-32">
         
         {/* Breadcrumb */}
-        <nav className="mb-12 flex items-center gap-2 text-sm font-mono">
+        <nav className="mb-12 flex items-center gap-2 text-sm font-mono" aria-label="Breadcrumb">
           <a href="/" className="text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors">
             home
           </a>
-          <span className="text-zinc-300 dark:text-zinc-700">/</span>
-          <span className="text-zinc-700 dark:text-zinc-300">faq</span>
+          <span className="text-zinc-300 dark:text-zinc-700" aria-hidden="true">/</span>
+          <span className="text-zinc-700 dark:text-zinc-300" aria-current="page">faq</span>
         </nav>
 
-        {/* Header da página */}
-        <header className="text-center mb-16 md:mb-20">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 mb-6 font-mono shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-            <span className="text-sm text-zinc-500 dark:text-zinc-400">faq.system</span>
-          </div>
-
-          {/* Título */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-white mb-6 font-syne">
-            Perguntas{' '}
-            <span className="relative">
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-red-600 to-red-700 dark:from-red-400 dark:via-red-500 dark:to-red-600">
-                Frequentes
-              </span>
-              <span className="absolute -bottom-2 left-0 right-0 h-3 bg-red-500/20 dark:bg-red-600/20 blur-lg" />
-            </span>
-          </h1>
-
-          {/* Subtítulo */}
-          <p className="text-zinc-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            Tire suas dúvidas sobre automação de dados e como posso 
-            transformar os processos da sua empresa.
-          </p>
-
-          {/* Linha decorativa */}
-          <div className="flex items-center justify-center gap-3 mt-8">
-            <div className="w-12 h-px bg-gradient-to-r from-transparent to-zinc-300 dark:to-zinc-700" />
-            <div className="w-2 h-2 rounded-full bg-red-600" />
-            <div className="w-12 h-px bg-gradient-to-l from-transparent to-zinc-300 dark:to-zinc-700" />
-          </div>
-        </header>
+        {/* Header da página - componente memoizado */}
+        <PageHeader />
 
         {/* Lista de FAQs */}
-        <section className="space-y-4">
+        <section className="space-y-4" aria-label="Perguntas frequentes">
           {faqData.map((item, index) => (
             <FaqItem
               key={index}
@@ -265,33 +353,13 @@ export default function FaqPage() {
               pergunta={item.pergunta}
               resposta={item.resposta}
               isOpen={openIndex === index}
-              onClick={() => handleToggle(index)}
+              onToggle={toggleHandlers[index]}
             />
           ))}
         </section>
 
-        {/* CTA Section */}
-        <section className="mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 p-6 rounded-2xl bg-white/80 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60 backdrop-blur-sm shadow-lg shadow-zinc-200/50 dark:shadow-none">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-lg shadow-red-500/30 dark:shadow-red-900/30">
-                <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div className="text-left">
-                <p className="text-zinc-900 dark:text-white font-semibold">Ainda tem dúvidas?</p>
-                <p className="text-zinc-500 dark:text-zinc-400 text-sm">Vamos conversar sem compromisso</p>
-              </div>
-            </div>
-            <a 
-              href="/#contato" 
-              className="px-6 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-red-600 to-red-700 text-white hover:from-red-500 hover:to-red-600 transition-all duration-300 shadow-lg shadow-red-500/30 dark:shadow-red-900/30 hover:shadow-red-500/50 dark:hover:shadow-red-900/50 hover:-translate-y-0.5"
-            >
-              Falar com Assis
-            </a>
-          </div>
-        </section>
+        {/* CTA Section - componente memoizado */}
+        <CtaSection />
 
         {/* Voltar para Home */}
         <div className="mt-12 text-center">
@@ -299,14 +367,7 @@ export default function FaqPage() {
             href="/" 
             className="inline-flex items-center gap-2 text-zinc-500 hover:text-red-500 dark:hover:text-red-400 transition-colors text-sm group font-mono"
           >
-            <svg 
-              className="w-4 h-4 transition-transform group-hover:-translate-x-1" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
+            <ArrowLeftIcon />
             voltar para home
           </a>
         </div>

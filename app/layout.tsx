@@ -8,7 +8,6 @@ import Image from "next/image";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-
 import "./globals.css";
 
 // ── FONTS ────────────────────────────────────────────────
@@ -54,7 +53,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${serif.variable}`}
     >
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-red-600 selection:text-white transition-colors duration-300">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-red-600 selection:text-white transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider>
           <SiteNav />
           {/* pt-20 compensa a altura do nav flutuante (52px) + margem top (16px) */}
