@@ -65,7 +65,7 @@ export function ThemeToggle() {
         hover:text-zinc-900 dark:hover:text-zinc-100
         
         transition-colors duration-200
-        outline-none focus-visible:ring-2 focus-visible:ring-red-500
+        outline-none focus-visible:ring-2 focus-visible:ring-blue-500
       "
     >
       {/* Ícone com animação de entrada/saída */}

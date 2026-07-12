@@ -7,7 +7,7 @@ export default function NotFound() {
         min-h-screen font-serif px-6 flex items-center justify-center
         bg-white text-zinc-900
         dark:bg-zinc-950 dark:text-zinc-100
-        selection:bg-red-600 selection:text-white
+        selection:bg-blue-600 selection:text-white
         transition-colors duration-300
       "
     >
@@ -15,8 +15,8 @@ export default function NotFound() {
         aria-hidden
         className="
           absolute inset-0 pointer-events-none
-          bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(220,38,38,0.06),transparent_70%)]
-          dark:bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(220,38,38,0.12),transparent_70%)]
+          bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(37,99,235,0.06),transparent_70%)]
+          dark:bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,rgba(37,99,235,0.12),transparent_70%)]
         "
       />
 
@@ -24,10 +24,10 @@ export default function NotFound() {
         {/* Etiqueta */}
         <div className="flex items-center gap-2 mb-8 animate-[fadeUp_0.6s_0.05s_both]">
           <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-60" />
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-60" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
           </span>
-          <span className="font-sans text-[0.65rem] tracking-[0.28em] uppercase text-red-600 dark:text-red-400">
+          <span className="font-sans text-[0.65rem] tracking-[0.28em] uppercase text-blue-600 dark:text-blue-400">
             Erro de execução
           </span>
         </div>
@@ -39,7 +39,7 @@ export default function NotFound() {
             animate-[fadeUp_0.6s_0.15s_both]
           "
         >
-          4<em className="not-italic text-red-600 dark:text-red-500">0</em>4
+          4<em className="not-italic text-blue-600 dark:text-blue-500">0</em>4
         </h1>
 
         <p
@@ -72,9 +72,9 @@ export default function NotFound() {
           "
         >
           <div className="flex items-center gap-1.5 mb-3">
-            <span className="w-2 h-2 rounded-full bg-red-500" />
-            <span className="w-2 h-2 rounded-full bg-red-500/50" />
-            <span className="w-2 h-2 rounded-full bg-red-500/25" />
+            <span className="w-2 h-2 rounded-full bg-blue-500" />
+            <span className="w-2 h-2 rounded-full bg-blue-500/50" />
+            <span className="w-2 h-2 rounded-full bg-blue-500/25" />
             <span className="font-sans text-[0.6rem] tracking-widest uppercase text-zinc-500 ml-2">
               router.py
             </span>
@@ -82,7 +82,7 @@ export default function NotFound() {
           <pre className="font-mono text-[0.72rem] leading-relaxed text-zinc-600 dark:text-zinc-400 whitespace-pre-wrap">
 {`> buscando rota...
 > verificando cache
-`}<span className="text-red-600 dark:text-red-400">{`✗ exit code 404 — rota não encontrada`}</span>
+`}<span className="text-blue-600 dark:text-blue-400">{`✗ exit code 404 — rota não encontrada`}</span>
           </pre>
         </div>
 
@@ -92,7 +92,7 @@ export default function NotFound() {
             href="/"
             className="
               group font-sans inline-flex items-center gap-2 px-6 py-3 rounded-md
-              bg-red-600 hover:bg-red-500 text-white text-sm font-medium tracking-wide
+              bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium tracking-wide
               transition-colors duration-200
             "
           >

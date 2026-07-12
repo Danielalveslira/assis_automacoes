@@ -85,7 +85,7 @@ function StarRating({ rating }: { rating: number }) {
         <svg
           key={i}
           className={`w-4 h-4 ${
-            i < rating ? "text-red-500" : "text-zinc-300 dark:text-zinc-700"
+            i < rating ? "text-blue-500" : "text-zinc-300 dark:text-zinc-700"
           }`}
           fill="currentColor"
           viewBox="0 0 20 20"
@@ -109,12 +109,12 @@ function DepoimentoCard({ depoimento }: { depoimento: Depoimento }) {
                    dark:from-zinc-900/90 dark:via-zinc-900/70 dark:to-zinc-950/90 
                    backdrop-blur-sm
                    transition-all duration-300 ease-out
-                   hover:border-red-400 dark:hover:border-red-600/50 
-                   hover:shadow-[0_-4px_20px_rgba(220,38,38,0.15),0_4px_20px_rgba(220,38,38,0.1)]
+                   hover:border-blue-400 dark:hover:border-blue-600/50 
+                   hover:shadow-[0_-4px_20px_rgba(37,99,235,0.15),0_4px_20px_rgba(37,99,235,0.1)]
                    hover:-translate-y-1"
       >
         {/* Aspas decorativas */}
-        <div className="absolute top-4 right-6 text-red-400/20 dark:text-red-600/20 pointer-events-none">
+        <div className="absolute top-4 right-6 text-blue-400/20 dark:text-blue-600/20 pointer-events-none">
           <svg className="w-16 h-16" fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
           </svg>
@@ -127,14 +127,14 @@ function DepoimentoCard({ depoimento }: { depoimento: Depoimento }) {
           </p>
 
           {/* Divisor */}
-          <div className="w-12 h-[2px] bg-gradient-to-r from-red-600 to-transparent mb-5" />
+          <div className="w-12 h-[2px] bg-gradient-to-r from-blue-600 to-transparent mb-5" />
 
           {/* Info do autor */}
           <div className="flex items-center gap-4">
             {/* Foto */}
             <div className="relative">
-              <div className="absolute inset-0 bg-red-600/30 rounded-full blur-md scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700 group-hover:ring-red-400 dark:group-hover:ring-red-600/50 transition-all duration-500">
+              <div className="absolute inset-0 bg-blue-600/30 rounded-full blur-md scale-110 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-14 h-14 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700 group-hover:ring-blue-400 dark:group-hover:ring-blue-600/50 transition-all duration-500">
                 {!imageError ? (
                   <img
                     src={depoimento.foto}
@@ -143,7 +143,7 @@ function DepoimentoCard({ depoimento }: { depoimento: Depoimento }) {
                     onError={() => setImageError(true)}
                   />
                 ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center">
+                  <div className="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center">
                     <span className="text-white font-bold text-lg">
                       {depoimento.nome.charAt(0)}
                     </span>
@@ -160,7 +160,7 @@ function DepoimentoCard({ depoimento }: { depoimento: Depoimento }) {
               <p className="text-zinc-500 dark:text-zinc-500 text-xs truncate font-mono">
                 {depoimento.cargo}
               </p>
-              <p className="text-red-600 dark:text-red-500/80 text-xs truncate font-mono">
+              <p className="text-blue-600 dark:text-blue-500/80 text-xs truncate font-mono">
                 {depoimento.empresa}
               </p>
             </div>
@@ -238,11 +238,11 @@ export default function Depoimentos() {
         />
 
         {/* Gradientes de fundo */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-400/5 dark:bg-red-600/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-red-400/5 dark:bg-red-600/5 rounded-full blur-[120px]" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/5 dark:bg-blue-600/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-400/5 dark:bg-blue-600/5 rounded-full blur-[120px]" />
 
         {/* Linha decorativa vertical */}
-        <div className="absolute left-1/2 top-0 w-px h-24 bg-gradient-to-b from-transparent via-red-500/30 dark:via-red-600/30 to-transparent" />
+        <div className="absolute left-1/2 top-0 w-px h-24 bg-gradient-to-b from-transparent via-blue-500/30 dark:via-blue-600/30 to-transparent" />
       </div>
 
       {/* Header da seção */}
@@ -250,15 +250,15 @@ export default function Depoimentos() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-[2px] bg-red-600" />
-              <span className="text-red-600 dark:text-red-500 text-sm font-mono uppercase tracking-[0.2em]">
+              <div className="w-12 h-[2px] bg-blue-600" />
+              <span className="text-blue-600 dark:text-blue-500 text-sm font-mono uppercase tracking-[0.2em]">
                 Depoimentos
               </span>
             </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white leading-tight">
               O que dizem sobre
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-red-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">
                 nosso trabalho
               </span>
             </h2>
@@ -313,7 +313,7 @@ export default function Depoimentos() {
         </p>
         <a
           href="#contato"
-          className="inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(220,38,38,0.4)]"
+          className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]"
         >
           Solicitar Orçamento
           <svg

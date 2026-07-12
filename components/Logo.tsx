@@ -30,28 +30,28 @@ export default function Logo({ className = "", width = 40, height = 40 }) {
         {/* Left sword */}
         <path
           d="M400 400c-20 0-40 10-40 30v240c0 20 20 30 40 30h60c20 0 40-10 40-30V430c0-20-20-30-40-30h-60z"
-          fill="#8B5CF6"
+          fill="#1D4ED8"
         />
 
         {/* Right sword */}
         <path
           d="M600 400c20 0 40 10 40 30v240c0 20-20 30-40 30h-60c-20 0-40-10-40-30V430c0-20 20-30 40-30h60z"
-          fill="#8B5CF6"
+          fill="#1D4ED8"
         />
 
         {/* Center decorative elements */}
         <path
           d="M450 500c-20 0-40 10-40 30v40c0 20 20 30 40 30h100c20 0 40-10 40-30v-40c0-20-20-30-40-30H450z"
-          fill="#EC4899"
+          fill="#38BDF8"
         />
 
         {/* Top decorative dot */}
-        <circle cx="500" cy="280" r="15" fill="#EC4899" />
+        <circle cx="500" cy="280" r="15" fill="#38BDF8" />
 
         {/* Circuit patterns */}
         <path
           d="M460 250v20M500 250v20M540 250v20"
-          stroke="#EC4899"
+          stroke="#38BDF8"
           strokeWidth="6"
           strokeLinecap="round"
         />

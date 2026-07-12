@@ -14,7 +14,7 @@ const EMAILJS_TEMPLATE_ID = 'template_jtqofnh'; // Email Templates → Template 
 const EMAILJS_PUBLIC_KEY = 'fCNUuBVm6LLcwB_5n';    // Account → Public Key
 // ══════════════════════════════════════════════════════════════
 
-const WHATSAPP_NUMBER = '849183-0983';
+const WHATSAPP_NUMBER = '558491830983'; // ⚠️ 
 
 interface FormData {
   nome: string;
@@ -39,7 +39,7 @@ export default function ContatoAutomacao() {
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#dc2626', '#ef4444', '#f87171', '#fca5a5', '#ffffff'],
+      colors: ['#1D4ED8', '#2563EB', '#3B82F6', '#93C5FD', '#ffffff'],
     });
 
     // Explosões laterais com delay para efeito cascata
@@ -49,7 +49,7 @@ export default function ContatoAutomacao() {
         angle: 60,
         spread: 55,
         origin: { x: 0, y: 0.6 },
-        colors: ['#dc2626', '#ef4444', '#22c55e', '#ffffff'],
+        colors: ['#1D4ED8', '#2563EB', '#22c55e', '#ffffff'],
       });
     }, 150);
 
@@ -59,7 +59,7 @@ export default function ContatoAutomacao() {
         angle: 120,
         spread: 55,
         origin: { x: 1, y: 0.6 },
-        colors: ['#dc2626', '#ef4444', '#22c55e', '#ffffff'],
+        colors: ['#1D4ED8', '#2563EB', '#22c55e', '#ffffff'],
       });
     }, 300);
   }, []);
@@ -118,7 +118,8 @@ export default function ContatoAutomacao() {
     const message = encodeURIComponent(
       `Olá! Vim pelo site e gostaria de saber mais sobre automação de dados.`
     );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+    const digitsOnly = WHATSAPP_NUMBER.replace(/\D/g, '');
+    window.open(`https://wa.me/${digitsOnly}?text=${message}`, '_blank');
   };
 
   const isValid = form.nome.length >= 2 && form.whatsapp.length >= 14 && form.mensagem.length >= 10;
@@ -153,8 +154,8 @@ export default function ContatoAutomacao() {
           pointer-events-none absolute
           top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2
           w-[40rem] h-[40rem]
-          bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.06),transparent_70%)]
-          dark:bg-[radial-gradient(ellipse_at_center,rgba(220,38,38,0.1),transparent_70%)]
+          bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.06),transparent_70%)]
+          dark:bg-[radial-gradient(ellipse_at_center,rgba(37,99,235,0.1),transparent_70%)]
           blur-3xl
         "
       />
@@ -165,16 +166,16 @@ export default function ContatoAutomacao() {
         <div className="mb-16 md:mb-20 animate-[fadeUp_0.7s_0.1s_both]">
           <div className="inline-flex items-center gap-2 mb-6">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-60" />
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-red-500" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-60" />
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
             </span>
-            <span className="font-sans text-[0.65rem] tracking-[0.28em] uppercase text-red-600 dark:text-red-400">
+            <span className="font-sans text-[0.65rem] tracking-[0.28em] uppercase text-blue-600 dark:text-blue-400">
               Vamos conversar
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-[1.08]">
             Pronto para{' '}
-            <em className="not-italic text-red-600 dark:text-red-500">automatizar</em>?
+            <em className="not-italic text-blue-600 dark:text-blue-500">automatizar</em>?
           </h2>
         </div>
 
@@ -195,7 +196,7 @@ export default function ContatoAutomacao() {
               bg-white dark:bg-zinc-800/50
               border border-zinc-200 dark:border-white/10
               rounded-xl
-              hover:border-red-500/50 dark:hover:border-red-500/30
+              hover:border-blue-500/50 dark:hover:border-blue-500/30
               transition-all duration-300
               mb-10
             "
@@ -205,7 +206,7 @@ export default function ContatoAutomacao() {
             onKeyDown={(e) => e.key === 'Enter' && openWhatsApp()}
             >
               {/* Linha decorativa */}
-              <div className="absolute top-0 left-8 w-12 h-px bg-red-500 -translate-y-px" />
+              <div className="absolute top-0 left-8 w-12 h-px bg-blue-500 -translate-y-px" />
 
               <div className="flex items-start gap-5">
                 {/* Ícone WhatsApp */}
@@ -231,7 +232,7 @@ export default function ContatoAutomacao() {
                   <div className="font-sans text-[0.6rem] tracking-[0.25em] uppercase text-green-600 dark:text-green-400 mb-2">
                     Resposta imediata
                   </div>
-                  <div className="text-xl md:text-2xl font-normal mb-2 group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
+                  <div className="text-xl md:text-2xl font-normal mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     Chamar no WhatsApp
                   </div>
                   <div className="font-sans text-sm text-zinc-500 dark:text-zinc-500">
@@ -245,7 +246,7 @@ export default function ContatoAutomacao() {
                   w-10 h-10 flex items-center justify-center
                   rounded-full
                   bg-zinc-100 dark:bg-white/5
-                  group-hover:bg-red-600 group-hover:translate-x-1
+                  group-hover:bg-blue-600 group-hover:translate-x-1
                   transition-all duration-300
                 ">
                   <svg
@@ -296,7 +297,7 @@ export default function ContatoAutomacao() {
               shadow-xl shadow-zinc-900/5 dark:shadow-black/20
             ">
               {/* Acento vermelho no canto */}
-              <div aria-hidden className="absolute top-0 right-10 w-20 h-1 bg-gradient-to-r from-red-500 to-red-600 rounded-b-full" />
+              <div aria-hidden className="absolute top-0 right-10 w-20 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded-b-full" />
 
               <form onSubmit={handleSubmit} className="space-y-6">
 
@@ -307,7 +308,7 @@ export default function ContatoAutomacao() {
                     className={`
                       absolute left-4 transition-all duration-200 pointer-events-none font-sans
                       ${focused === 'nome' || form.nome
-                        ? 'top-2 text-[0.65rem] tracking-[0.15em] uppercase text-red-600 dark:text-red-400'
+                        ? 'top-2 text-[0.65rem] tracking-[0.15em] uppercase text-blue-600 dark:text-blue-400'
                         : 'top-1/2 -translate-y-1/2 text-sm text-zinc-400'
                       }
                     `}
@@ -328,7 +329,7 @@ export default function ContatoAutomacao() {
                       border border-zinc-200 dark:border-white/10
                       rounded-lg
                       font-sans text-base text-zinc-900 dark:text-white
-                      focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/30
+                      focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30
                       transition-all duration-200
                     "
                   />
@@ -341,7 +342,7 @@ export default function ContatoAutomacao() {
                     className={`
                       absolute left-4 transition-all duration-200 pointer-events-none font-sans
                       ${focused === 'whatsapp' || form.whatsapp
-                        ? 'top-2 text-[0.65rem] tracking-[0.15em] uppercase text-red-600 dark:text-red-400'
+                        ? 'top-2 text-[0.65rem] tracking-[0.15em] uppercase text-blue-600 dark:text-blue-400'
                         : 'top-1/2 -translate-y-1/2 text-sm text-zinc-400'
                       }
                     `}
@@ -363,7 +364,7 @@ export default function ContatoAutomacao() {
                       border border-zinc-200 dark:border-white/10
                       rounded-lg
                       font-sans text-base text-zinc-900 dark:text-white
-                      focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/30
+                      focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30
                       transition-all duration-200
                     "
                   />
@@ -382,7 +383,7 @@ export default function ContatoAutomacao() {
                     className={`
                       absolute left-4 transition-all duration-200 pointer-events-none font-sans
                       ${focused === 'mensagem' || form.mensagem
-                        ? 'top-2 text-[0.65rem] tracking-[0.15em] uppercase text-red-600 dark:text-red-400'
+                        ? 'top-2 text-[0.65rem] tracking-[0.15em] uppercase text-blue-600 dark:text-blue-400'
                         : 'top-5 text-sm text-zinc-400'
                       }
                     `}
@@ -403,7 +404,7 @@ export default function ContatoAutomacao() {
                       border border-zinc-200 dark:border-white/10
                       rounded-lg
                       font-sans text-base text-zinc-900 dark:text-white
-                      focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/30
+                      focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/30
                       transition-all duration-200
                       resize-none
                     "
@@ -418,6 +419,7 @@ export default function ContatoAutomacao() {
                 <button
                   type="submit"
                   disabled={!isValid || status === 'sending'}
+                  suppressHydrationWarning
                   className={`
                     relative w-full py-4 px-6
                     font-sans text-sm font-medium tracking-wide
@@ -427,9 +429,9 @@ export default function ContatoAutomacao() {
                     ${status === 'success'
                       ? 'bg-green-600 text-white cursor-default'
                       : status === 'error'
-                      ? 'bg-red-800 text-white cursor-default'
+                      ? 'bg-rose-600 text-white cursor-default'
                       : isValid && status !== 'sending'
-                      ? 'bg-red-600 hover:bg-red-500 text-white cursor-pointer shadow-lg shadow-red-500/25 hover:shadow-red-500/40'
+                      ? 'bg-blue-600 hover:bg-blue-500 text-white cursor-pointer shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40'
                       : 'bg-zinc-200 dark:bg-white/10 text-zinc-400 dark:text-zinc-600 cursor-not-allowed'
                     }
                   `}

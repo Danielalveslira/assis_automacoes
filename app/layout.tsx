@@ -53,7 +53,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${serif.variable}`}
     >
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-red-600 selection:text-white transition-colors duration-300" suppressHydrationWarning>
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100 selection:bg-blue-600 selection:text-white transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider>
           <SiteNav />
           {/* pt-20 compensa a altura do nav flutuante (52px) + margem top (16px) */}
@@ -113,7 +113,7 @@ function SiteFooter() {
 
         <Link
           href="/faq"
-          className="font-sans text-xs tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-500 hover:text-red-600 dark:hover:text-red-400 transition-colors duration-200"
+          className="font-sans text-xs tracking-[0.2em] uppercase text-zinc-500 dark:text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
         >
           FAQ
         </Link>

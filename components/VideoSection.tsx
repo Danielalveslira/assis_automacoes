@@ -64,7 +64,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#dc2626', '#ef4444', '#f87171', '#fca5a5', '#ffffff'],
+      colors: ['#1D4ED8', '#2563EB', '#3B82F6', '#93C5FD', '#ffffff'],
     });
 
     // Explosões laterais com delay para efeito cascata
@@ -74,7 +74,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
         angle: 60,
         spread: 55,
         origin: { x: 0, y: 0.6 },
-        colors: ['#dc2626', '#ef4444', '#22c55e', '#ffffff'],
+        colors: ['#1D4ED8', '#2563EB', '#22c55e', '#ffffff'],
       });
     }, 150);
 
@@ -84,7 +84,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
         angle: 120,
         spread: 55,
         origin: { x: 1, y: 0.6 },
-        colors: ['#dc2626', '#ef4444', '#22c55e', '#ffffff'],
+        colors: ['#1D4ED8', '#2563EB', '#22c55e', '#ffffff'],
       });
     }, 300);
   }, []);
@@ -156,7 +156,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
         </p>
         <button
           onClick={() => setStatus('idle')}
-          className="font-sans text-xs text-red-600 hover:text-red-500 transition-colors"
+          className="font-sans text-xs text-blue-600 hover:text-blue-500 transition-colors"
         >
           Enviar outra mensagem
         </button>
@@ -174,7 +174,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
             className={`
               absolute left-3 transition-all duration-200 pointer-events-none font-sans
               ${focused === 'nome' || form.nome
-                ? 'top-1.5 text-[0.6rem] tracking-[0.12em] uppercase text-red-600 dark:text-red-400'
+                ? 'top-1.5 text-[0.6rem] tracking-[0.12em] uppercase text-blue-600 dark:text-blue-400'
                 : 'top-1/2 -translate-y-1/2 text-sm text-zinc-400'
               }
             `}
@@ -195,7 +195,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
               border border-zinc-200 dark:border-white/10
               rounded-lg
               font-sans text-sm text-zinc-900 dark:text-white
-              focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/20
+              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20
               transition-all duration-200
             "
           />
@@ -208,7 +208,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
             className={`
               absolute left-3 transition-all duration-200 pointer-events-none font-sans
               ${focused === 'whatsapp' || form.whatsapp
-                ? 'top-1.5 text-[0.6rem] tracking-[0.12em] uppercase text-red-600 dark:text-red-400'
+                ? 'top-1.5 text-[0.6rem] tracking-[0.12em] uppercase text-blue-600 dark:text-blue-400'
                 : 'top-1/2 -translate-y-1/2 text-sm text-zinc-400'
               }
             `}
@@ -229,7 +229,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
               border border-zinc-200 dark:border-white/10
               rounded-lg
               font-sans text-sm text-zinc-900 dark:text-white
-              focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/20
+              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20
               transition-all duration-200
             "
           />
@@ -242,7 +242,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
             className={`
               absolute left-3 transition-all duration-200 pointer-events-none font-sans
               ${focused === 'mensagem' || form.mensagem
-                ? 'top-1.5 text-[0.6rem] tracking-[0.12em] uppercase text-red-600 dark:text-red-400'
+                ? 'top-1.5 text-[0.6rem] tracking-[0.12em] uppercase text-blue-600 dark:text-blue-400'
                 : 'top-3 text-sm text-zinc-400'
               }
             `}
@@ -263,7 +263,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
               border border-zinc-200 dark:border-white/10
               rounded-lg
               font-sans text-sm text-zinc-900 dark:text-white
-              focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500/20
+              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20
               transition-all duration-200
               resize-none
             "
@@ -276,6 +276,7 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
         <button
           type="submit"
           disabled={!isValid || status === 'sending'}
+          suppressHydrationWarning
           className={`
             w-full py-3 px-4
             font-sans text-sm font-medium tracking-wide
@@ -283,9 +284,9 @@ function ContactForm({ videoTitle }: { videoTitle?: string }) {
             flex items-center justify-center gap-2
             transition-all duration-300
             ${status === 'error'
-              ? 'bg-red-800 text-white'
+              ? 'bg-rose-600 text-white'
               : isValid && status !== 'sending'
-              ? 'bg-red-600 hover:bg-red-500 text-white shadow-lg shadow-red-500/20'
+              ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-500/20'
               : 'bg-zinc-200 dark:bg-white/10 text-zinc-400 cursor-not-allowed'
             }
           `}
@@ -391,7 +392,7 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
             {/* Info + fechar */}
             <div className="flex items-start justify-between gap-4 px-5 py-4">
               <div className="min-w-0">
-                <p className="font-sans text-[10px] tracking-[.22em] uppercase text-red-600 dark:text-red-500 mb-1">
+                <p className="font-sans text-[10px] tracking-[.22em] uppercase text-blue-600 dark:text-blue-500 mb-1">
                   {video.tag}
                 </p>
                 <p className="font-serif text-base text-zinc-900 dark:text-zinc-100 leading-snug">
@@ -423,7 +424,7 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
                   </div>
                   <button
                     onClick={() => setShowForm(true)}
-                    className="flex-shrink-0 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-sans text-xs tracking-wide uppercase px-4 py-2.5 rounded-md transition-colors"
+                    className="flex-shrink-0 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-sans text-xs tracking-wide uppercase px-4 py-2.5 rounded-md transition-colors"
                   >
                     Quero também
                     <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
@@ -440,7 +441,7 @@ function VideoModal({ video, onClose }: { video: Video; onClose: () => void }) {
             <div className="lg:w-2/5 border-t lg:border-t-0 border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/50 flex flex-col">
               <div className="flex items-start justify-between gap-3 px-5 pt-5 pb-2">
                 <div>
-                  <p className="font-sans text-[10px] tracking-[.22em] uppercase text-red-600 dark:text-red-500 mb-1">
+                  <p className="font-sans text-[10px] tracking-[.22em] uppercase text-blue-600 dark:text-blue-500 mb-1">
                     Fale comigo
                   </p>
                   <p className="font-serif text-base text-zinc-900 dark:text-zinc-100 leading-snug">
@@ -493,7 +494,7 @@ function VideoCard({
         group relative rounded-xl overflow-hidden cursor-pointer
         bg-white dark:bg-zinc-900 border transition-all duration-300
         ${hovered
-          ? 'border-red-600/40 shadow-[0_0_0_1px_rgba(220,38,38,0.15)]'
+          ? 'border-blue-600/40 shadow-[0_0_0_1px_rgba(37,99,235,0.15)]'
           : 'border-zinc-200 dark:border-white/8'
         }
       `}
@@ -528,7 +529,7 @@ function VideoCard({
             flex items-center justify-center rounded-full border backdrop-blur-sm transition-all duration-200
             ${featured ? 'w-16 h-16' : 'w-12 h-12'}
             ${hovered
-              ? 'bg-red-600 border-red-600 scale-110'
+              ? 'bg-blue-600 border-blue-600 scale-110'
               : hasThumb
                 ? 'bg-white/15 border-white/30'
                 : 'bg-zinc-900/10 dark:bg-white/10 border-zinc-900/20 dark:border-white/20'
@@ -546,7 +547,7 @@ function VideoCard({
       </div>
 
       <div className={`px-4 ${featured ? 'py-4' : 'py-3'}`}>
-        <p className="font-sans text-[9px] tracking-[.22em] uppercase text-red-600 dark:text-red-500 mb-1.5">
+        <p className="font-sans text-[9px] tracking-[.22em] uppercase text-blue-600 dark:text-blue-500 mb-1.5">
           {video.tag}
         </p>
         <p className={`font-serif font-normal text-zinc-900 dark:text-zinc-100 leading-snug ${featured ? 'text-[17px]' : 'text-sm'}`}>
@@ -575,7 +576,7 @@ export function VideoSection() {
       >
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
-            <p className="font-sans text-[10px] tracking-[.28em] uppercase text-red-600 dark:text-red-500 mb-3">
+            <p className="font-sans text-[10px] tracking-[.28em] uppercase text-blue-600 dark:text-blue-500 mb-3">
               Automação em prática
             </p>
             <h2 className="font-serif text-4xl md:text-5xl font-normal tracking-tight text-zinc-900 dark:text-zinc-100 mb-3">
